@@ -17,21 +17,38 @@ const Contact = {
                 <textarea id="message" v-model="message"></textarea>
                 <button type="submit">Submit</button>
             </form>
+            
+            <!-- Show success message if form is submitted -->
+            <div v-if="formSubmitted">
+                <p>Form submitted successfully!</p>
+            </div>
+            <div v-else>
+                <p v-if="formError">{{ formError }}</p>
+            </div>
         </div>
     `,
     data() {
         return {
             name: '',
             email: '',
-            message: ''
+            message: '',
+            formSubmitted: false,
+            formError: '',
         };
     },
     methods: {
         submitForm() {
-            // Handle form submission here (e.g., send data to a server)
-            alert('Form submitted!');
-        }
-    }
+            // Simulate form submission and handle success/error
+            if (this.name && this.email && this.message) {
+                // Handle form submission here (e.g., send data to a server)
+                this.formSubmitted = true;
+                this.formError = '';
+            } else {
+                this.formSubmitted = false;
+                this.formError = 'Please fill in all fields.';
+            }
+        },
+    },
 };
 
 const routes = [
